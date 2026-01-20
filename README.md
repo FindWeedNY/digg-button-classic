@@ -8,6 +8,14 @@ this extension brings back the classic digg button style to the new digg.com. be
 
 5 different themes because why not:
 
+| classic | dark | light |
+|---------|------|-------|
+| ![classic](docs/screenshot.png) | ![dark](docs/screenshot-2.png) | ![light](docs/screenshot-3.png) |
+
+| cyberpunk | diggit |
+|-----------|--------|
+| ![cyberpunk](docs/screenshot-4.png) | ![diggit](docs/screenshot-5.png) |
+
 - **classic** - the og orange/green digg buttons from like 2008
 - **dark** - same vibe but for dark mode users
 - **light** - clean minimal look if you're into that
