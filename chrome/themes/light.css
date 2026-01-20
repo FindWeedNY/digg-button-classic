@@ -1,0 +1,226 @@
+/* Digg Button Classic - Light Theme */
+/* Clean minimal design with subtle shadows */
+
+/* Post container - add left padding for vote buttons */
+section[data-ggid] {
+  position: relative !important;
+  padding-left: 70px !important;
+}
+
+/* Vote button container - position on left */
+section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+  position: absolute !important;
+  left: 0 !important;
+  top: 24px !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  background: #ffffff !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08) !important;
+  padding: 0 !important;
+  width: 60px !important;
+  min-width: 60px !important;
+  overflow: hidden !important;
+  z-index: 10 !important;
+}
+
+/* Vote count display */
+div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
+  display: block !important;
+  background: #fafafa !important;
+  color: #1565c0 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  padding: 12px 4px 10px !important;
+  text-align: center !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  line-height: 1 !important;
+  order: 1 !important;
+}
+
+/* Hide original SVG icons */
+section[data-ggid] div[role="group"][aria-label="Vote on post"] button svg {
+  display: none !important;
+}
+
+/* Digg button - undigged state (blue) */
+button[aria-label="Digg this post"] {
+  position: relative !important;
+  background: #1976d2 !important;
+  border: none !important;
+  border-radius: 0 0 6px 6px !important;
+  padding: 8px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  transition: background 0.15s ease !important;
+  order: 2 !important;
+}
+
+button[aria-label="Digg this post"]:hover {
+  background: #1e88e5 !important;
+}
+
+button[aria-label="Digg this post"]::before {
+  content: 'Digg';
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+/* Digg button - digged state (green) */
+button[aria-label="Remove digg"] {
+  position: relative !important;
+  background: #43a047 !important;
+  border: none !important;
+  border-radius: 0 0 6px 6px !important;
+  padding: 8px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  transition: background 0.15s ease !important;
+  order: 2 !important;
+}
+
+button[aria-label="Remove digg"]:hover {
+  background: #4caf50 !important;
+}
+
+button[aria-label="Remove digg"] svg {
+  display: none !important;
+}
+
+button[aria-label="Remove digg"]::before {
+  content: 'Dugg';
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+/* Bury button - neutral state (gray) */
+button[aria-label="Bury"] {
+  position: relative !important;
+  background: #9e9e9e !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 5px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  transition: background 0.15s ease !important;
+  order: 3 !important;
+  margin-top: 4px !important;
+}
+
+button[aria-label="Bury"]:hover {
+  background: #757575 !important;
+}
+
+button[aria-label="Bury"] svg {
+  display: none !important;
+}
+
+button[aria-label="Bury"]::before {
+  content: 'Bury';
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+/* Bury button - buried state (red) */
+button[aria-label="Remove bury"] {
+  position: relative !important;
+  background: #e53935 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 5px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  transition: background 0.15s ease !important;
+  order: 3 !important;
+  margin-top: 4px !important;
+}
+
+button[aria-label="Remove bury"]:hover {
+  background: #f44336 !important;
+}
+
+button[aria-label="Remove bury"] svg {
+  display: none !important;
+}
+
+button[aria-label="Remove bury"]::before {
+  content: 'Buried';
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+/* Comment vote buttons */
+button[aria-label="Digg this comment"] {
+  background: #1976d2 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  min-width: 50px !important;
+  transition: background 0.15s ease !important;
+}
+
+button[aria-label="Digg this comment"]:hover {
+  background: #1e88e5 !important;
+}
+
+button[aria-label="Digg this comment"] svg {
+  display: none !important;
+}
+
+button[aria-label="Digg this comment"]::before {
+  content: 'Digg';
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+button[aria-label="Remove comment digg"] {
+  background: #43a047 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  min-width: 50px !important;
+  transition: background 0.15s ease !important;
+}
+
+button[aria-label="Remove comment digg"]:hover {
+  background: #4caf50 !important;
+}
+
+button[aria-label="Remove comment digg"] svg {
+  display: none !important;
+}
+
+button[aria-label="Remove comment digg"]::before {
+  content: 'Dugg';
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}

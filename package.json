@@ -1,0 +1,20 @@
+{
+  "name": "digg-button-classic",
+  "version": "1.0.0",
+  "description": "Classic Digg-style vote buttons with multiple themes",
+  "author": "contact@findweedny.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FindWeedNY/digg-button-classic"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "lint": "eslint *.js chrome/*.js --no-error-on-unmatched-pattern",
+    "build": "./build.sh",
+    "ci": "npm run lint && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

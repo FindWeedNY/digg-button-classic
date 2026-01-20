@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Digg Button Classic",
+  "version": "1.0.0",
+  "description": "Classic Digg-style vote buttons with multiple themes: Classic, Dark, Light, Cyberpunk, and Diggit (Reddit)",
+  "author": "contact@findweedny.com",
+  "homepage_url": "https://github.com/FindWeedNY/digg-button-classic",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "digg-button-classic@findweedny.com",
+      "strict_min_version": "109.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://digg.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://digg.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Digg Button Classic",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["themes/*.css"],
+      "matches": ["*://digg.com/*"]
+    }
+  ]
+}

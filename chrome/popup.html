@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Digg Button Classic</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 280px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      background: #1a1a1b;
+      color: #d7dadc;
+    }
+
+    .header {
+      padding: 16px;
+      background: linear-gradient(180deg, #ff6f00 0%, #e65c00 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    .themes {
+      padding: 16px;
+    }
+
+    .themes h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #818384;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .theme-option {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #272729;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .theme-option:hover {
+      background: #333;
+    }
+
+    .theme-option.selected {
+      border-color: #ff6f00;
+      background: #2d2a24;
+    }
+
+    .theme-option input {
+      display: none;
+    }
+
+    .theme-preview {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .theme-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .theme-info p {
+      font-size: 11px;
+      color: #818384;
+    }
+
+    /* Theme preview colors */
+    .preview-classic {
+      background: linear-gradient(180deg, #ffb347 0%, #ff6f00 100%);
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .preview-dark {
+      background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
+      border: 1px solid #444;
+      color: #5dade2;
+    }
+
+    .preview-light {
+      background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+      border: 1px solid #ddd;
+      color: #1a5276;
+    }
+
+    .preview-cyberpunk {
+      background: linear-gradient(180deg, #ff00ff 0%, #0ff 100%);
+      color: #000;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    .preview-diggit {
+      background: linear-gradient(180deg, #ff4500 0%, #cc3700 100%);
+      color: white;
+    }
+
+    .footer {
+      padding: 12px 16px;
+      border-top: 1px solid #343536;
+      text-align: center;
+      font-size: 11px;
+      color: #6a6a6b;
+    }
+
+    .footer a {
+      color: #ff6f00;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .status {
+      padding: 8px 16px;
+      background: #272729;
+      text-align: center;
+      font-size: 12px;
+      color: #818384;
+    }
+
+    .status.active {
+      color: #4caf50;
+    }
+
+    .status.inactive {
+      color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Digg Button Classic</h1>
+    <p>Vote buttons with style</p>
+  </div>
+
+  <div id="status" class="status">Checking...</div>
+
+  <div class="themes">
+    <h2>Select Theme</h2>
+
+    <label class="theme-option" data-theme="classic">
+      <input type="radio" name="theme" value="classic">
+      <div class="theme-preview preview-classic">digg</div>
+      <div class="theme-info">
+        <h3>Classic</h3>
+        <p>Original orange Digg style</p>
+      </div>
+    </label>
+
+    <label class="theme-option" data-theme="dark">
+      <input type="radio" name="theme" value="dark">
+      <div class="theme-preview preview-dark">142</div>
+      <div class="theme-info">
+        <h3>Dark</h3>
+        <p>Dark mode with cyan accents</p>
+      </div>
+    </label>
+
+    <label class="theme-option" data-theme="light">
+      <input type="radio" name="theme" value="light">
+      <div class="theme-preview preview-light">142</div>
+      <div class="theme-info">
+        <h3>Light</h3>
+        <p>Clean minimal design</p>
+      </div>
+    </label>
+
+    <label class="theme-option" data-theme="cyberpunk">
+      <input type="radio" name="theme" value="cyberpunk">
+      <div class="theme-preview preview-cyberpunk">DIGG</div>
+      <div class="theme-info">
+        <h3>Cyberpunk</h3>
+        <p>Neon futuristic vibes</p>
+      </div>
+    </label>
+
+    <label class="theme-option" data-theme="diggit">
+      <input type="radio" name="theme" value="diggit">
+      <div class="theme-preview preview-diggit">&uarr;</div>
+      <div class="theme-info">
+        <h3>Diggit</h3>
+        <p>Reddit-style arrows</p>
+      </div>
+    </label>
+  </div>
+
+  <div class="footer">
+    Made with nostalgia for <a href="https://digg.com">Digg</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

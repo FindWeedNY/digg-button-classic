@@ -1,0 +1,239 @@
+/* Digg Button Classic - Cyberpunk Theme */
+/* Neon aesthetic but still readable */
+
+/* Post container - add left padding for vote buttons */
+section[data-ggid] {
+  position: relative !important;
+  padding-left: 75px !important;
+}
+
+/* Vote button container - position on left */
+section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+  position: absolute !important;
+  left: 0 !important;
+  top: 24px !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  background: #0d0d1a !important;
+  border: 1px solid #ff00ff80 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.2) !important;
+  padding: 0 !important;
+  width: 65px !important;
+  min-width: 65px !important;
+  overflow: hidden !important;
+  z-index: 10 !important;
+}
+
+/* Vote count display */
+div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
+  display: block !important;
+  background: #12121f !important;
+  color: #0ff !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  font-family: 'Consolas', 'Monaco', monospace !important;
+  padding: 12px 4px 10px !important;
+  text-align: center !important;
+  border-bottom: 1px solid #ff00ff60 !important;
+  line-height: 1 !important;
+  order: 1 !important;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.5) !important;
+}
+
+/* Hide original SVG icons */
+section[data-ggid] div[role="group"][aria-label="Vote on post"] button svg {
+  display: none !important;
+}
+
+/* Digg button - undigged state (magenta) */
+button[aria-label="Digg this post"] {
+  position: relative !important;
+  background: linear-gradient(180deg, #aa0077 0%, #880066 50%, #660055 100%) !important;
+  border: none !important;
+  border-top: 1px solid #cc3399 !important;
+  border-radius: 0 0 3px 3px !important;
+  padding: 8px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  order: 2 !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Digg this post"]:hover {
+  background: linear-gradient(180deg, #cc0088 0%, #aa0077 50%, #880066 100%) !important;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.4) !important;
+}
+
+button[aria-label="Digg this post"]::before {
+  content: 'DIGG IT';
+  white-space: nowrap;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Digg button - digged state (cyan) */
+button[aria-label="Remove digg"] {
+  position: relative !important;
+  background: linear-gradient(180deg, #008888 0%, #006666 50%, #004d4d 100%) !important;
+  border: none !important;
+  border-top: 1px solid #00aaaa !important;
+  border-radius: 0 0 3px 3px !important;
+  padding: 8px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  order: 2 !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove digg"]:hover {
+  background: linear-gradient(180deg, #00aaaa 0%, #008888 50%, #006666 100%) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4) !important;
+}
+
+button[aria-label="Remove digg"] svg {
+  display: none !important;
+}
+
+button[aria-label="Remove digg"]::before {
+  content: 'DUGG';
+  white-space: nowrap;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Bury button - neutral state */
+button[aria-label="Bury"] {
+  position: relative !important;
+  background: linear-gradient(180deg, #2a1a3a 0%, #1a1025 50%, #0d0d1a 100%) !important;
+  border: 1px solid #ff00ff40 !important;
+  border-radius: 2px !important;
+  padding: 5px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  order: 3 !important;
+  margin-top: 4px !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Bury"]:hover {
+  background: linear-gradient(180deg, #3a2a4a 0%, #2a1a3a 50%, #1a1025 100%) !important;
+  border-color: #ff00ff80 !important;
+}
+
+button[aria-label="Bury"] svg {
+  display: none !important;
+}
+
+button[aria-label="Bury"]::before {
+  content: 'BURY';
+  white-space: nowrap;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  color: #cc66cc;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Bury button - buried state (red) */
+button[aria-label="Remove bury"] {
+  position: relative !important;
+  background: linear-gradient(180deg, #aa2222 0%, #882222 50%, #661111 100%) !important;
+  border: 1px solid #ff444480 !important;
+  border-radius: 2px !important;
+  padding: 5px 4px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: auto !important;
+  order: 3 !important;
+  margin-top: 4px !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove bury"]:hover {
+  background: linear-gradient(180deg, #cc3333 0%, #aa2222 50%, #882222 100%) !important;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3) !important;
+}
+
+button[aria-label="Remove bury"] svg {
+  display: none !important;
+}
+
+button[aria-label="Remove bury"]::before {
+  content: 'BURIED';
+  white-space: nowrap;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Comment vote buttons */
+button[aria-label="Digg this comment"] {
+  background: linear-gradient(180deg, #aa0077 0%, #880066 50%, #660055 100%) !important;
+  border: 1px solid #cc339980 !important;
+  border-radius: 3px !important;
+  padding: 4px 10px !important;
+  min-width: 55px !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Digg this comment"]:hover {
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.3) !important;
+}
+
+button[aria-label="Digg this comment"] svg {
+  display: none !important;
+}
+
+button[aria-label="Digg this comment"]::before {
+  content: 'DIGG';
+  white-space: nowrap;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+button[aria-label="Remove comment digg"] {
+  background: linear-gradient(180deg, #008888 0%, #006666 50%, #004d4d 100%) !important;
+  border: 1px solid #00aaaa80 !important;
+  border-radius: 3px !important;
+  padding: 4px 10px !important;
+  min-width: 55px !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove comment digg"]:hover {
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3) !important;
+}
+
+button[aria-label="Remove comment digg"] svg {
+  display: none !important;
+}
+
+button[aria-label="Remove comment digg"]::before {
+  content: 'DUGG';
+  white-space: nowrap;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
