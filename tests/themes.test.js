@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const THEMES_DIR = path.join(__dirname, '..', 'themes');
-const EXPECTED_THEMES = ['classic', 'dark', 'light', 'cyberpunk', 'diggit'];
+const EXPECTED_THEMES = ['classic', 'cyberpunk', 'diggit', 'minimal', 'chevron'];
 
 describe('Themes', () => {
   test('all theme files exist', () => {
@@ -22,7 +22,8 @@ describe('Themes', () => {
     }
   });
 
-  test('themes target digg vote buttons', () => {
+  test('classic-style themes target digg vote buttons with full selectors', () => {
+    const classicStyleThemes = ['classic', 'cyberpunk', 'diggit'];
     const requiredSelectors = [
       'section[data-ggid]',
       'aria-label="Vote on post"',
@@ -30,7 +31,7 @@ describe('Themes', () => {
       'aria-label="Remove digg"'
     ];
 
-    for (const theme of EXPECTED_THEMES) {
+    for (const theme of classicStyleThemes) {
       const themePath = path.join(THEMES_DIR, `${theme}.css`);
       const content = fs.readFileSync(themePath, 'utf8');
 
@@ -43,24 +44,31 @@ describe('Themes', () => {
     }
   });
 
-  test('themes hide original SVG icons', () => {
-    for (const theme of EXPECTED_THEMES) {
+  test('classic-style themes hide SVG and use ::before', () => {
+    const classicStyleThemes = ['classic', 'cyberpunk', 'diggit'];
+    for (const theme of classicStyleThemes) {
       const themePath = path.join(THEMES_DIR, `${theme}.css`);
       const content = fs.readFileSync(themePath, 'utf8');
       assert.ok(
         content.includes('svg') && content.includes('display: none'),
         `${theme}.css should hide SVG icons`
       );
-    }
-  });
-
-  test('themes use ::before for button text', () => {
-    for (const theme of EXPECTED_THEMES) {
-      const themePath = path.join(THEMES_DIR, `${theme}.css`);
-      const content = fs.readFileSync(themePath, 'utf8');
       assert.ok(
         content.includes('::before'),
         `${theme}.css should use ::before pseudo-elements`
+      );
+    }
+  });
+
+  test('minimal-style themes keep default layout', () => {
+    const minimalStyleThemes = ['minimal', 'chevron'];
+    for (const theme of minimalStyleThemes) {
+      const themePath = path.join(THEMES_DIR, `${theme}.css`);
+      const content = fs.readFileSync(themePath, 'utf8');
+      // These themes style buttons but don't hide SVGs or reposition
+      assert.ok(
+        content.includes('Digg this post'),
+        `${theme}.css should target vote buttons`
       );
     }
   });

@@ -65,7 +65,7 @@ describe('Chrome-specific Scripts (legacy)', () => {
 describe('Popup HTML', () => {
   test('popup.html has all theme options', () => {
     const content = fs.readFileSync(path.join(ROOT, 'popup.html'), 'utf8');
-    const themes = ['classic', 'dark', 'light', 'cyberpunk', 'diggit'];
+    const themes = ['classic', 'cyberpunk', 'diggit', 'minimal', 'chevron', 'custom'];
 
     for (const theme of themes) {
       assert.ok(
@@ -73,6 +73,11 @@ describe('Popup HTML', () => {
         `should have ${theme} theme option`
       );
     }
+  });
+
+  test('popup.html has dark mode toggle', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'popup.html'), 'utf8');
+    assert.ok(content.includes('darkModeToggle'), 'should have dark mode toggle');
   });
 
   test('popup.html references popup.js', () => {

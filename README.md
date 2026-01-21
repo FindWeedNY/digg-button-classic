@@ -6,7 +6,7 @@ this extension brings back the classic digg button style to the new digg.com. be
 
 ## themes
 
-5 different themes because why not:
+7 built-in themes + custom palettes:
 
 | classic | dark | light |
 |---------|------|-------|
@@ -21,6 +21,9 @@ this extension brings back the classic digg button style to the new digg.com. be
 - **light** - clean minimal look if you're into that
 - **cyberpunk** - neon pink and cyan, glowing effects, the whole thing
 - **diggit** - reddit-style upvote/downvote arrows (you know the ones)
+- **minimal** - keeps default layout, just adds vote state colors
+- **chevron** - keeps default layout, replaces arrows with chevrons
+- **custom** - create your own color palette (see below)
 
 ## install
 
@@ -43,6 +46,45 @@ manual: download `.zip` from [releases](https://github.com/FindWeedNY/digg-butto
 ## usage
 
 click the extension icon, pick a theme. that's it. it saves your choice.
+
+## custom themes
+
+create your own color palette with a simple format - just like slack themes:
+
+```
+#upvote,#downvote,#neutral;effects
+```
+
+**format:**
+- first color = upvote/digg color
+- second color = downvote/bury color
+- third color = neutral/unvoted color
+- after semicolon = effects (optional)
+
+**layout:**
+- `classic` - repositioned digg-style buttons on the left with labels
+- (default) - minimal, keeps arrows in place
+
+**mode:**
+- `dark` - dark mode container/background
+- (default) - light mode
+
+**effects:**
+- `glow` - adds glow/shadow effect
+- `bold` - larger icons
+- `outline` - adds outline to voted buttons
+
+**preset palettes to try:**
+```
+#50fa7b,#ff5555,#6272a4;dark              (dracula)
+#a6e22e,#f92672,#75715e;classic,dark      (monokai)
+#ff71ce,#01cdfe,#b967ff;dark,glow         (vaporwave)
+#238636,#da3633,#8b949e;classic,bold      (github)
+#1db954,#b91d47,#535353;dark,outline      (spotify)
+#ff9800,#f44336,#5d4037;classic,glow      (ember)
+```
+
+copy any palette string and paste it in the custom theme input to use it. share your palettes with friends!
 
 ## building
 

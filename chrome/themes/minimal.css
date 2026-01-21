@@ -1,0 +1,205 @@
+/* Digg Button Classic - Minimal Theme */
+/* Keeps default arrow placement, adds vote state colors */
+
+/* Don't reposition anything - just style the existing buttons */
+
+/* Upvote button - unvoted state */
+button[aria-label="Digg this post"] {
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Digg this post"]:hover {
+  background: rgba(255, 111, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+button[aria-label="Digg this post"]:hover svg {
+  color: #ff6f00 !important;
+}
+
+button[aria-label="Digg this post"]:hover svg path {
+  fill: #ff6f00 !important;
+}
+
+/* Upvote button - voted state (orange) */
+button[aria-label="Remove digg"] {
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove digg"] svg {
+  color: #ff6f00 !important;
+}
+
+button[aria-label="Remove digg"] svg path {
+  fill: #ff6f00 !important;
+}
+
+button[aria-label="Remove digg"]:hover {
+  background: rgba(255, 111, 0, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+/* Downvote/Bury button - unvoted state */
+button[aria-label="Bury"] {
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Bury"]:hover {
+  background: rgba(113, 147, 255, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+button[aria-label="Bury"]:hover svg {
+  color: #7193ff !important;
+}
+
+button[aria-label="Bury"]:hover svg path {
+  fill: #7193ff !important;
+}
+
+/* Downvote/Bury button - voted state (blue) */
+button[aria-label="Remove bury"] {
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove bury"] svg {
+  color: #7193ff !important;
+}
+
+button[aria-label="Remove bury"] svg path {
+  fill: #7193ff !important;
+}
+
+button[aria-label="Remove bury"]:hover {
+  background: rgba(113, 147, 255, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+/* Vote count styling when voted */
+button[aria-label="Remove digg"] ~ span[aria-label$="diggs"],
+button[aria-label="Remove digg"] + span[aria-label$="diggs"] {
+  color: #ff6f00 !important;
+}
+
+button[aria-label="Remove bury"] ~ span[aria-label$="diggs"],
+button[aria-label="Remove bury"] + span[aria-label$="diggs"] {
+  color: #7193ff !important;
+}
+
+/* Comment vote buttons */
+button[aria-label="Digg this comment"] {
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Digg this comment"]:hover {
+  background: rgba(255, 111, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+button[aria-label="Digg this comment"]:hover svg {
+  color: #ff6f00 !important;
+}
+
+button[aria-label="Digg this comment"]:hover svg path {
+  fill: #ff6f00 !important;
+}
+
+button[aria-label="Remove comment digg"] svg {
+  color: #ff6f00 !important;
+}
+
+button[aria-label="Remove comment digg"] svg path {
+  fill: #ff6f00 !important;
+}
+
+button[aria-label="Remove comment digg"]:hover {
+  background: rgba(255, 111, 0, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+/* ========== DARK MODE ========== */
+/* Brighter colors and more visible hover states for dark backgrounds */
+
+.dbc-dark button[aria-label="Digg this post"]:hover {
+  background: rgba(255, 140, 0, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Digg this post"]:hover svg {
+  color: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Digg this post"]:hover svg path {
+  fill: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove digg"] svg {
+  color: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove digg"] svg path {
+  fill: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove digg"]:hover {
+  background: rgba(255, 140, 0, 0.25) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover {
+  background: rgba(129, 170, 255, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover svg {
+  color: #81aaff !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover svg path {
+  fill: #81aaff !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"] svg {
+  color: #81aaff !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"] svg path {
+  fill: #81aaff !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"]:hover {
+  background: rgba(129, 170, 255, 0.25) !important;
+}
+
+/* Dark mode vote count */
+.dbc-dark button[aria-label="Remove digg"] ~ span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Remove digg"] + span[aria-label$="diggs"] {
+  color: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"] ~ span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Remove bury"] + span[aria-label$="diggs"] {
+  color: #81aaff !important;
+}
+
+/* Dark mode comment buttons */
+.dbc-dark button[aria-label="Digg this comment"]:hover {
+  background: rgba(255, 140, 0, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]:hover svg {
+  color: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]:hover svg path {
+  fill: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"] svg {
+  color: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"] svg path {
+  fill: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"]:hover {
+  background: rgba(255, 140, 0, 0.25) !important;
+}

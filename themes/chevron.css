@@ -1,0 +1,243 @@
+/* Digg Button Classic - Chevron Theme */
+/* Keeps default placement, replaces icons with chevron-style arrows */
+
+/* Hide original SVG icons */
+div[role="group"][aria-label="Vote on post"] button svg,
+button[aria-label="Digg this comment"] svg,
+button[aria-label="Remove comment digg"] svg {
+  display: none !important;
+}
+
+/* Upvote button - unvoted state */
+button[aria-label="Digg this post"] {
+  position: relative !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Digg this post"]::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-left: 2.5px solid #878a8c;
+  border-top: 2.5px solid #878a8c;
+  transform: rotate(45deg);
+  margin-top: 4px;
+  transition: border-color 0.15s ease;
+}
+
+button[aria-label="Digg this post"]:hover {
+  background: rgba(255, 111, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+button[aria-label="Digg this post"]:hover::before {
+  border-color: #ff6f00;
+}
+
+/* Upvote button - voted state (orange) */
+button[aria-label="Remove digg"] {
+  position: relative !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove digg"]::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-left: 2.5px solid #ff6f00;
+  border-top: 2.5px solid #ff6f00;
+  transform: rotate(45deg);
+  margin-top: 4px;
+}
+
+button[aria-label="Remove digg"]:hover {
+  background: rgba(255, 111, 0, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+/* Downvote/Bury button - unvoted state */
+button[aria-label="Bury"] {
+  position: relative !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Bury"]::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid #878a8c;
+  border-bottom: 2.5px solid #878a8c;
+  transform: rotate(45deg);
+  margin-bottom: 4px;
+  transition: border-color 0.15s ease;
+}
+
+button[aria-label="Bury"]:hover {
+  background: rgba(113, 147, 255, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+button[aria-label="Bury"]:hover::before {
+  border-color: #7193ff;
+}
+
+/* Downvote/Bury button - voted state (blue) */
+button[aria-label="Remove bury"] {
+  position: relative !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove bury"]::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid #7193ff;
+  border-bottom: 2.5px solid #7193ff;
+  transform: rotate(45deg);
+  margin-bottom: 4px;
+}
+
+button[aria-label="Remove bury"]:hover {
+  background: rgba(113, 147, 255, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+/* Vote count styling when voted */
+button[aria-label="Remove digg"] ~ span[aria-label$="diggs"],
+button[aria-label="Remove digg"] + span[aria-label$="diggs"] {
+  color: #ff6f00 !important;
+}
+
+button[aria-label="Remove bury"] ~ span[aria-label$="diggs"],
+button[aria-label="Remove bury"] + span[aria-label$="diggs"] {
+  color: #7193ff !important;
+}
+
+/* Comment vote buttons */
+button[aria-label="Digg this comment"] {
+  position: relative !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Digg this comment"]::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #878a8c;
+  border-top: 2px solid #878a8c;
+  transform: rotate(45deg);
+  margin-top: 3px;
+  transition: border-color 0.15s ease;
+}
+
+button[aria-label="Digg this comment"]:hover {
+  background: rgba(255, 111, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+button[aria-label="Digg this comment"]:hover::before {
+  border-color: #ff6f00;
+}
+
+button[aria-label="Remove comment digg"] {
+  position: relative !important;
+  transition: all 0.15s ease !important;
+}
+
+button[aria-label="Remove comment digg"]::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #ff6f00;
+  border-top: 2px solid #ff6f00;
+  transform: rotate(45deg);
+  margin-top: 3px;
+}
+
+button[aria-label="Remove comment digg"]:hover {
+  background: rgba(255, 111, 0, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+/* ========== DARK MODE ========== */
+/* Brighter chevrons and hover states for dark backgrounds */
+
+/* Dark mode unvoted chevrons - lighter gray */
+.dbc-dark button[aria-label="Digg this post"]::before {
+  border-color: #a0a0a0;
+}
+
+.dbc-dark button[aria-label="Bury"]::before {
+  border-color: #a0a0a0;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]::before {
+  border-color: #a0a0a0;
+}
+
+/* Dark mode hover states */
+.dbc-dark button[aria-label="Digg this post"]:hover {
+  background: rgba(255, 140, 0, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Digg this post"]:hover::before {
+  border-color: #ff8c00;
+}
+
+.dbc-dark button[aria-label="Remove digg"]::before {
+  border-color: #ff8c00;
+}
+
+.dbc-dark button[aria-label="Remove digg"]:hover {
+  background: rgba(255, 140, 0, 0.25) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover {
+  background: rgba(129, 170, 255, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover::before {
+  border-color: #81aaff;
+}
+
+.dbc-dark button[aria-label="Remove bury"]::before {
+  border-color: #81aaff;
+}
+
+.dbc-dark button[aria-label="Remove bury"]:hover {
+  background: rgba(129, 170, 255, 0.25) !important;
+}
+
+/* Dark mode vote count */
+.dbc-dark button[aria-label="Remove digg"] ~ span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Remove digg"] + span[aria-label$="diggs"] {
+  color: #ff8c00 !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"] ~ span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Remove bury"] + span[aria-label$="diggs"] {
+  color: #81aaff !important;
+}
+
+/* Dark mode comment buttons */
+.dbc-dark button[aria-label="Digg this comment"]:hover {
+  background: rgba(255, 140, 0, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]:hover::before {
+  border-color: #ff8c00;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"]::before {
+  border-color: #ff8c00;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"]:hover {
+  background: rgba(255, 140, 0, 0.25) !important;
+}

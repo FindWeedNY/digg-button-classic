@@ -29,7 +29,7 @@ section[data-ggid] div[role="group"][aria-label="Vote on post"] {
 div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
   display: block !important;
   background: transparent !important;
-  color: #1a1a1b !important;
+  color: #1c1c1c !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
@@ -40,11 +40,9 @@ div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
   order: 2 !important;
 }
 
-/* Dark mode vote count */
-@media (prefers-color-scheme: dark) {
-  div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
-    color: #d7dadc !important;
-  }
+/* Dark mode vote count - responds to extension toggle */
+.dbc-dark div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
+  color: #d7dadc !important;
 }
 
 /* Hide original SVG icons */
@@ -258,4 +256,79 @@ button[aria-label="Remove comment digg"]::before {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 10px solid #ff4500;
+}
+
+/* ========== DARK MODE ========== */
+/* Brighter arrows and more visible hover states for dark backgrounds */
+
+/* Dark mode unvoted arrows - lighter gray */
+.dbc-dark button[aria-label="Digg this post"]::before {
+  border-bottom-color: #a0a0a0;
+}
+
+.dbc-dark button[aria-label="Bury"]::before {
+  border-top-color: #a0a0a0;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]::before {
+  border-bottom-color: #a0a0a0;
+}
+
+/* Dark mode hover states */
+.dbc-dark button[aria-label="Digg this post"]:hover {
+  background: rgba(255, 69, 0, 0.15) !important;
+}
+
+.dbc-dark button[aria-label="Digg this post"]:hover::before {
+  border-bottom-color: #ff5722;
+}
+
+.dbc-dark button[aria-label="Remove digg"]::before {
+  border-bottom-color: #ff5722;
+}
+
+.dbc-dark button[aria-label="Remove digg"]:hover {
+  background: rgba(255, 69, 0, 0.2) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover {
+  background: rgba(129, 170, 255, 0.15) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover::before {
+  border-top-color: #81aaff;
+}
+
+.dbc-dark button[aria-label="Remove bury"]::before {
+  border-top-color: #81aaff;
+}
+
+.dbc-dark button[aria-label="Remove bury"]:hover {
+  background: rgba(129, 170, 255, 0.2) !important;
+}
+
+/* Dark mode vote count when voted */
+.dbc-dark button[aria-label="Remove digg"] ~ span[aria-label$="diggs"] {
+  color: #ff5722 !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"] ~ span[aria-label$="diggs"] {
+  color: #81aaff !important;
+}
+
+/* Dark mode comment buttons */
+.dbc-dark button[aria-label="Digg this comment"]:hover {
+  background: rgba(255, 69, 0, 0.15) !important;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]:hover::before {
+  border-bottom-color: #ff5722;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"]::before {
+  border-bottom-color: #ff5722;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"]:hover {
+  background: rgba(255, 69, 0, 0.2) !important;
 }

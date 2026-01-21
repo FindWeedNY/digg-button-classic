@@ -15,10 +15,10 @@ section[data-ggid] div[role="group"][aria-label="Vote on post"] {
   flex-direction: column !important;
   align-items: stretch !important;
   gap: 0 !important;
-  background: #d8d8d8 !important;
-  border: 1px solid #a0a0a0 !important;
+  background: linear-gradient(180deg, #f5f5f0 0%, #e8e8e3 100%) !important;
+  border: 1px solid #c0c0b8 !important;
   border-radius: 5px !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15), inset 0 -1px 0 rgba(0,0,0,0.1) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8) !important;
   padding: 0 !important;
   width: 60px !important;
   min-width: 60px !important;
@@ -29,17 +29,17 @@ section[data-ggid] div[role="group"][aria-label="Vote on post"] {
 /* Vote count display */
 div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
   display: block !important;
-  background: linear-gradient(180deg, #f8f8f8 0%, #e5e5e5 50%, #d8d8d8 100%) !important;
-  color: #1a5276 !important;
+  background: linear-gradient(180deg, #fff 0%, #f5f5f0 100%) !important;
+  color: #333 !important;
   font-size: 22px !important;
   font-weight: 700 !important;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   padding: 10px 4px 8px !important;
   text-align: center !important;
-  border-bottom: 1px solid #bbb !important;
+  border-bottom: 1px solid #d0d0c8 !important;
   line-height: 1 !important;
   order: 1 !important;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.8) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.9) !important;
 }
 
 /* Hide original SVG icons */
@@ -238,4 +238,78 @@ button[aria-label="Remove comment digg"]::before {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
   white-space: nowrap;
+}
+
+/* ========== DARK MODE ========== */
+
+/* Dark mode container */
+.dbc-dark section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%) !important;
+  border-color: #444 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+}
+
+/* Dark mode vote count */
+.dbc-dark div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
+  background: linear-gradient(180deg, #333 0%, #252525 100%) !important;
+  color: #e0e0e0 !important;
+  border-bottom-color: #444 !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5) !important;
+}
+
+/* Dark mode digg button */
+.dbc-dark button[aria-label="Digg this post"] {
+  background: linear-gradient(180deg, #cc7000 0%, #b35f00 30%, #994f00 70%, #804000 100%) !important;
+  border-top-color: #e08000 !important;
+}
+
+.dbc-dark button[aria-label="Digg this post"]:hover {
+  background: linear-gradient(180deg, #e08000 0%, #cc7000 30%, #b35f00 70%, #994f00 100%) !important;
+}
+
+/* Dark mode dugg button */
+.dbc-dark button[aria-label="Remove digg"] {
+  background: linear-gradient(180deg, #4a9a4a 0%, #3d8b3d 30%, #2e7d2e 70%, #1f6f1f 100%) !important;
+  border-top-color: #5cb85c !important;
+}
+
+.dbc-dark button[aria-label="Remove digg"]:hover {
+  background: linear-gradient(180deg, #5cb85c 0%, #4a9a4a 30%, #3d8b3d 70%, #2e7d2e 100%) !important;
+}
+
+/* Dark mode bury button */
+.dbc-dark button[aria-label="Bury"] {
+  background: linear-gradient(180deg, #555 0%, #444 30%, #333 70%, #222 100%) !important;
+}
+
+.dbc-dark button[aria-label="Bury"]:hover {
+  background: linear-gradient(180deg, #666 0%, #555 30%, #444 70%, #333 100%) !important;
+}
+
+/* Dark mode buried button */
+.dbc-dark button[aria-label="Remove bury"] {
+  background: linear-gradient(180deg, #c62828 0%, #b71c1c 30%, #a31515 70%, #8f0f0f 100%) !important;
+}
+
+.dbc-dark button[aria-label="Remove bury"]:hover {
+  background: linear-gradient(180deg, #d32f2f 0%, #c62828 30%, #b71c1c 70%, #a31515 100%) !important;
+}
+
+/* Dark mode comment buttons */
+.dbc-dark button[aria-label="Digg this comment"] {
+  background: linear-gradient(180deg, #cc7000 0%, #b35f00 30%, #994f00 70%, #804000 100%) !important;
+  border-color: #663300 !important;
+}
+
+.dbc-dark button[aria-label="Digg this comment"]:hover {
+  background: linear-gradient(180deg, #e08000 0%, #cc7000 30%, #b35f00 70%, #994f00 100%) !important;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"] {
+  background: linear-gradient(180deg, #4a9a4a 0%, #3d8b3d 30%, #2e7d2e 70%, #1f6f1f 100%) !important;
+  border-color: #1a5f1a !important;
+}
+
+.dbc-dark button[aria-label="Remove comment digg"]:hover {
+  background: linear-gradient(180deg, #5cb85c 0%, #4a9a4a 30%, #3d8b3d 70%, #2e7d2e 100%) !important;
 }

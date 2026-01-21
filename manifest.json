@@ -2,13 +2,13 @@
   "manifest_version": 3,
   "name": "Digg Button Classic",
   "version": "1.0.0",
-  "description": "Classic Digg-style vote buttons with multiple themes: Classic, Dark, Light, Cyberpunk, and Diggit (Reddit)",
+  "description": "Classic Digg-style vote buttons with 7 built-in themes plus custom color palettes",
   "author": "contact@findweedny.com",
   "homepage_url": "https://github.com/FindWeedNY/digg-button-classic",
   "browser_specific_settings": {
     "gecko": {
       "id": "digg-button-classic@findweedny.com",
-      "strict_min_version": "109.0",
+      "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]
       }
