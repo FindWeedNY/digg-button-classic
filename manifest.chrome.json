@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Digg Button Classic",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Classic Digg-style vote buttons with 7 built-in themes plus custom color palettes",
   "author": "contact@findweedny.com",
   "homepage_url": "https://github.com/FindWeedNY/digg-button-classic",
