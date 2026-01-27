@@ -106,7 +106,8 @@ button[aria-label="Digg this post"]::before {
 }
 
 /* Digg button - digged state (cyan) - light mode */
-button[aria-label="Remove digg"] {
+button[aria-label="Remove digg"],
+button[aria-label="Digg this post"][aria-pressed="true"] {
   position: relative !important;
   background: linear-gradient(180deg, #00aaaa 0%, #008888 50%, #006666 100%) !important;
   border: none !important;
@@ -121,28 +122,33 @@ button[aria-label="Remove digg"] {
   box-shadow: 0 0 4px rgba(0, 170, 170, 0.3) !important;
 }
 
-button[aria-label="Remove digg"]:hover {
+button[aria-label="Remove digg"]:hover,
+button[aria-label="Digg this post"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #00cccc 0%, #00aaaa 50%, #008888 100%) !important;
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.5) !important;
 }
 
 /* Digg button dugg - dark mode */
-.dbc-dark button[aria-label="Remove digg"] {
+.dbc-dark button[aria-label="Remove digg"],
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"] {
   background: linear-gradient(180deg, #008888 0%, #006666 50%, #004d4d 100%) !important;
   border-top-color: #00aaaa !important;
   box-shadow: none !important;
 }
 
-.dbc-dark button[aria-label="Remove digg"]:hover {
+.dbc-dark button[aria-label="Remove digg"]:hover,
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #00aaaa 0%, #008888 50%, #006666 100%) !important;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.4) !important;
 }
 
-button[aria-label="Remove digg"] svg {
+button[aria-label="Remove digg"] svg,
+button[aria-label="Digg this post"][aria-pressed="true"] svg {
   display: none !important;
 }
 
-button[aria-label="Remove digg"]::before {
+button[aria-label="Remove digg"]::before,
+button[aria-label="Digg this post"][aria-pressed="true"]::before {
   content: 'DUGG';
   white-space: nowrap;
   font-family: 'Consolas', 'Monaco', monospace;
@@ -206,7 +212,8 @@ button[aria-label="Bury"]::before {
 }
 
 /* Bury button - buried state (red) */
-button[aria-label="Remove bury"] {
+button[aria-label="Remove bury"],
+button[aria-label="Bury"][aria-pressed="true"] {
   position: relative !important;
   background: linear-gradient(180deg, #aa2222 0%, #882222 50%, #661111 100%) !important;
   border: 1px solid #ff444480 !important;
@@ -220,16 +227,19 @@ button[aria-label="Remove bury"] {
   transition: all 0.15s ease !important;
 }
 
-button[aria-label="Remove bury"]:hover {
+button[aria-label="Remove bury"]:hover,
+button[aria-label="Bury"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #cc3333 0%, #aa2222 50%, #882222 100%) !important;
   box-shadow: 0 0 8px rgba(255, 0, 0, 0.3) !important;
 }
 
-button[aria-label="Remove bury"] svg {
+button[aria-label="Remove bury"] svg,
+button[aria-label="Bury"][aria-pressed="true"] svg {
   display: none !important;
 }
 
-button[aria-label="Remove bury"]::before {
+button[aria-label="Remove bury"]::before,
+button[aria-label="Bury"][aria-pressed="true"]::before {
   content: 'BURIED';
   white-space: nowrap;
   font-family: 'Consolas', 'Monaco', monospace;

@@ -84,4 +84,36 @@ describe('Popup HTML', () => {
     const content = fs.readFileSync(path.join(ROOT, 'popup.html'), 'utf8');
     assert.ok(content.includes('popup.js'), 'should reference popup.js');
   });
+
+  test('popup.html has collapse comments toggle', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'popup.html'), 'utf8');
+    assert.ok(content.includes('collapseComments'), 'should have collapse comments toggle');
+  });
+});
+
+describe('Comment Collapse Feature', () => {
+  test('content.js has collapse comments functionality', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'content.js'), 'utf8');
+    assert.ok(content.includes('collapseAllComments'), 'should have collapseAllComments function');
+    assert.ok(content.includes('expandAllComments'), 'should have expandAllComments function');
+    assert.ok(content.includes('collapseCommentsEnabled'), 'should track collapse setting');
+    assert.ok(content.includes('collapseChanged'), 'should handle collapseChanged messages');
+  });
+
+  test('content.chrome.js has collapse comments functionality', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'content.chrome.js'), 'utf8');
+    assert.ok(content.includes('collapseAllComments'), 'should have collapseAllComments function');
+    assert.ok(content.includes('expandAllComments'), 'should have expandAllComments function');
+    assert.ok(content.includes('collapseCommentsEnabled'), 'should track collapse setting');
+  });
+
+  test('popup.js handles collapse setting', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'popup.js'), 'utf8');
+    assert.ok(content.includes('collapseComments'), 'should handle collapseComments setting');
+  });
+
+  test('popup.chrome.js handles collapse setting', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'popup.chrome.js'), 'utf8');
+    assert.ok(content.includes('collapseComments'), 'should handle collapseComments setting');
+  });
 });

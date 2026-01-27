@@ -72,4 +72,47 @@ describe('Themes', () => {
       );
     }
   });
+
+  test('all themes handle bury button voted state with both detection methods', () => {
+    // Digg uses two methods to indicate voted state:
+    // 1. Changing aria-label from "Bury" to "Remove bury"
+    // 2. Setting aria-pressed="true" on the same button
+    for (const theme of EXPECTED_THEMES) {
+      const themePath = path.join(THEMES_DIR, `${theme}.css`);
+      const content = fs.readFileSync(themePath, 'utf8');
+
+      // Should handle "Remove bury" label (method 1)
+      assert.ok(
+        content.includes('aria-label="Remove bury"'),
+        `${theme}.css should handle "Remove bury" label for voted state`
+      );
+
+      // Should handle aria-pressed="true" on Bury button (method 2)
+      assert.ok(
+        content.includes('aria-label="Bury"][aria-pressed="true"') ||
+        content.includes("aria-label=\"Bury\"][aria-pressed=\"true\""),
+        `${theme}.css should handle aria-pressed="true" on Bury button for voted state`
+      );
+    }
+  });
+
+  test('all themes handle upvote button voted state with both detection methods', () => {
+    for (const theme of EXPECTED_THEMES) {
+      const themePath = path.join(THEMES_DIR, `${theme}.css`);
+      const content = fs.readFileSync(themePath, 'utf8');
+
+      // Should handle "Remove digg" label (method 1)
+      assert.ok(
+        content.includes('aria-label="Remove digg"'),
+        `${theme}.css should handle "Remove digg" label for voted state`
+      );
+
+      // Should handle aria-pressed="true" on Digg button (method 2)
+      assert.ok(
+        content.includes('aria-label="Digg this post"][aria-pressed="true"') ||
+        content.includes("aria-label=\"Digg this post\"][aria-pressed=\"true\""),
+        `${theme}.css should handle aria-pressed="true" on upvote button for voted state`
+      );
+    }
+  });
 });

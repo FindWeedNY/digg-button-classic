@@ -6,24 +6,24 @@ this extension brings back the classic digg button style to the new digg.com. be
 
 ## themes
 
-7 built-in themes + custom palettes:
+5 built-in themes + fully customizable:
 
-| classic | dark | light |
-|---------|------|-------|
-| ![classic](docs/screenshot.png) | ![dark](docs/screenshot-2.png) | ![light](docs/screenshot-3.png) |
+| minimal | classic | diggit |
+|---------|---------|--------|
+| ![minimal](docs/screenshot.png) | ![classic](docs/screenshot-2.png) | ![diggit](docs/screenshot-3.png) |
 
-| cyberpunk | diggit |
-|-----------|--------|
-| ![cyberpunk](docs/screenshot-4.png) | ![diggit](docs/screenshot-5.png) |
+| chevron | cyberpunk | custom |
+|---------|-----------|--------|
+| ![chevron](docs/screenshot-4.png) | ![cyberpunk](docs/screenshot-5.png) | ![custom](docs/screenshot-6.png) |
 
-- **classic** - the og orange/green digg buttons from like 2008
-- **dark** - same vibe but for dark mode users
-- **light** - clean minimal look if you're into that
-- **cyberpunk** - neon pink and cyan, glowing effects, the whole thing
-- **diggit** - reddit-style upvote/downvote arrows (you know the ones)
-- **minimal** - keeps default layout, just adds vote state colors
-- **chevron** - keeps default layout, replaces arrows with chevrons
-- **custom** - create your own color palette (see below)
+- **minimal** - clean inline arrows with vote state colors
+- **classic** - the og digg buttons repositioned to the left with labels
+- **diggit** - reddit-style upvote/downvote colors
+- **chevron** - replaces arrows with chevron style
+- **cyberpunk** - neon pink and cyan with glowing effects
+- **custom** - full control with visual color picker (see below)
+
+all themes support a **dark/light mode toggle** in the popup header.
 
 ## install
 
@@ -49,50 +49,42 @@ click the extension icon, pick a theme. that's it. it saves your choice.
 
 ## custom themes
 
-create your own color palette with a simple format - just like slack themes:
+select "Custom" and use the built-in **visual color picker** to create your own theme:
 
+- **arrow colors** - click any swatch to pick colors for dugg, buried, and unvoted states
+- **background colors** - optional backgrounds for voted buttons (double-click to reset to auto)
+- **hex input** - type hex codes directly if you prefer
+- **quick presets** - one-click palettes like Reddit, Stonks, Vapor, etc.
+
+**options:**
+- **layout** - inline (default) or side (classic digg-style with labels)
+- **style** - arrow (default) or chevron
+- **effects** - glow, bold, outline
+
+**palette string format** (for sharing):
 ```
-#upvote,#downvote,#neutral;effects
-```
-
-**format:**
-- first color = upvote/digg color
-- second color = downvote/bury color
-- third color = neutral/unvoted color
-- after semicolon = effects (optional)
-
-**layout:**
-- `classic` - repositioned digg-style buttons on the left with labels
-- (default) - minimal, keeps arrows in place
-
-**mode:**
-- `dark` - dark mode container/background
-- (default) - light mode
-
-**effects:**
-- `glow` - adds glow/shadow effect
-- `bold` - larger icons
-- `outline` - adds outline to voted buttons
-
-**preset palettes to try:**
-```
-#50fa7b,#ff5555,#6272a4;dark              (dracula)
-#a6e22e,#f92672,#75715e;classic,dark      (monokai)
-#ff71ce,#01cdfe,#b967ff;dark,glow         (vaporwave)
-#238636,#da3633,#8b949e;classic,bold      (github)
-#1db954,#b91d47,#535353;dark,outline      (spotify)
-#ff9800,#f44336,#5d4037;classic,glow      (ember)
+#upvote,#downvote,#neutral,#upBg,#downBg,#neutralBg;effects
 ```
 
-copy any palette string and paste it in the custom theme input to use it. share your palettes with friends!
+background colors are optional. example palettes:
+```
+#50fa7b,#ff5555,#6272a4                   (dracula)
+#ff71ce,#01cdfe,#b967ff;glow              (vaporwave)
+#16a34a,#dc2626,#6b7280                   (stonks)
+#a855f7,#ec4899,#6366f1                   (vapor)
+```
+
+paste any palette string into the text input at the bottom to import it.
 
 ## building
 
 ```bash
-./build.sh
+make build    # or ./build.sh
+make test     # run tests
+make lint     # run linter
 ```
 
-spits out a `.xpi` file ready to distribute.
+spits out `.xpi` (Firefox) and `.zip` (Chrome) files ready to distribute.
 
 ## privacy
 

@@ -36,12 +36,14 @@ button[aria-label="Digg this post"]:hover::before {
 }
 
 /* Upvote button - voted state (orange) */
-button[aria-label="Remove digg"] {
+button[aria-label="Remove digg"],
+button[aria-label="Digg this post"][aria-pressed="true"] {
   position: relative !important;
   transition: all 0.15s ease !important;
 }
 
-button[aria-label="Remove digg"]::before {
+button[aria-label="Remove digg"]::before,
+button[aria-label="Digg this post"][aria-pressed="true"]::before {
   content: '';
   display: inline-block;
   width: 10px;
@@ -52,7 +54,8 @@ button[aria-label="Remove digg"]::before {
   margin-top: 4px;
 }
 
-button[aria-label="Remove digg"]:hover {
+button[aria-label="Remove digg"]:hover,
+button[aria-label="Digg this post"][aria-pressed="true"]:hover {
   background: rgba(255, 111, 0, 0.15) !important;
   border-radius: 4px !important;
 }
@@ -85,12 +88,14 @@ button[aria-label="Bury"]:hover::before {
 }
 
 /* Downvote/Bury button - voted state (blue) */
-button[aria-label="Remove bury"] {
+button[aria-label="Remove bury"],
+button[aria-label="Bury"][aria-pressed="true"] {
   position: relative !important;
   transition: all 0.15s ease !important;
 }
 
-button[aria-label="Remove bury"]::before {
+button[aria-label="Remove bury"]::before,
+button[aria-label="Bury"][aria-pressed="true"]::before {
   content: '';
   display: inline-block;
   width: 10px;
@@ -101,19 +106,24 @@ button[aria-label="Remove bury"]::before {
   margin-bottom: 4px;
 }
 
-button[aria-label="Remove bury"]:hover {
+button[aria-label="Remove bury"]:hover,
+button[aria-label="Bury"][aria-pressed="true"]:hover {
   background: rgba(113, 147, 255, 0.15) !important;
   border-radius: 4px !important;
 }
 
 /* Vote count styling when voted */
 button[aria-label="Remove digg"] ~ span[aria-label$="diggs"],
-button[aria-label="Remove digg"] + span[aria-label$="diggs"] {
+button[aria-label="Remove digg"] + span[aria-label$="diggs"],
+button[aria-label="Digg this post"][aria-pressed="true"] ~ span[aria-label$="diggs"],
+button[aria-label="Digg this post"][aria-pressed="true"] + span[aria-label$="diggs"] {
   color: #ff6f00 !important;
 }
 
 button[aria-label="Remove bury"] ~ span[aria-label$="diggs"],
-button[aria-label="Remove bury"] + span[aria-label$="diggs"] {
+button[aria-label="Remove bury"] + span[aria-label$="diggs"],
+button[aria-label="Bury"][aria-pressed="true"] ~ span[aria-label$="diggs"],
+button[aria-label="Bury"][aria-pressed="true"] + span[aria-label$="diggs"] {
   color: #7193ff !important;
 }
 
@@ -190,11 +200,13 @@ button[aria-label="Remove comment digg"]:hover {
   border-color: #ff8c00;
 }
 
-.dbc-dark button[aria-label="Remove digg"]::before {
+.dbc-dark button[aria-label="Remove digg"]::before,
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"]::before {
   border-color: #ff8c00;
 }
 
-.dbc-dark button[aria-label="Remove digg"]:hover {
+.dbc-dark button[aria-label="Remove digg"]:hover,
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"]:hover {
   background: rgba(255, 140, 0, 0.25) !important;
 }
 
@@ -206,22 +218,28 @@ button[aria-label="Remove comment digg"]:hover {
   border-color: #81aaff;
 }
 
-.dbc-dark button[aria-label="Remove bury"]::before {
+.dbc-dark button[aria-label="Remove bury"]::before,
+.dbc-dark button[aria-label="Bury"][aria-pressed="true"]::before {
   border-color: #81aaff;
 }
 
-.dbc-dark button[aria-label="Remove bury"]:hover {
+.dbc-dark button[aria-label="Remove bury"]:hover,
+.dbc-dark button[aria-label="Bury"][aria-pressed="true"]:hover {
   background: rgba(129, 170, 255, 0.25) !important;
 }
 
 /* Dark mode vote count */
 .dbc-dark button[aria-label="Remove digg"] ~ span[aria-label$="diggs"],
-.dbc-dark button[aria-label="Remove digg"] + span[aria-label$="diggs"] {
+.dbc-dark button[aria-label="Remove digg"] + span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"] ~ span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"] + span[aria-label$="diggs"] {
   color: #ff8c00 !important;
 }
 
 .dbc-dark button[aria-label="Remove bury"] ~ span[aria-label$="diggs"],
-.dbc-dark button[aria-label="Remove bury"] + span[aria-label$="diggs"] {
+.dbc-dark button[aria-label="Remove bury"] + span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Bury"][aria-pressed="true"] ~ span[aria-label$="diggs"],
+.dbc-dark button[aria-label="Bury"][aria-pressed="true"] + span[aria-label$="diggs"] {
   color: #81aaff !important;
 }
 

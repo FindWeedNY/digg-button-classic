@@ -100,6 +100,53 @@
       color: #71717a;
     }
 
+    .settings-row {
+      padding: 6px 12px;
+      background: #1f1f23;
+      border-bottom: 1px solid #3f3f46;
+      display: flex;
+      align-items: center;
+    }
+
+    .setting-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 11px;
+      color: #a1a1aa;
+    }
+
+    .setting-toggle:hover {
+      color: #e4e4e7;
+    }
+
+    .setting-toggle input[type="checkbox"] {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #52525b;
+      border-radius: 3px;
+      background: #18181b;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .setting-toggle input[type="checkbox"]:checked {
+      background: #ff6f00;
+      border-color: #ff6f00;
+    }
+
+    .setting-toggle input[type="checkbox"]:checked::after {
+      content: '✓';
+      display: block;
+      color: white;
+      font-size: 10px;
+      text-align: center;
+      line-height: 10px;
+    }
+
     /* Theme Grid */
     .themes {
       padding: 8px 10px;
@@ -571,6 +618,13 @@
   </div>
 
   <div id="status" class="status">Checking...</div>
+
+  <div class="settings-row">
+    <label class="setting-toggle">
+      <input type="checkbox" id="collapseComments">
+      <span class="setting-label">Auto-collapse comments</span>
+    </label>
+  </div>
 
   <div class="themes">
     <h2>Select Theme</h2>

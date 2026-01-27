@@ -1,14 +1,21 @@
 /* Digg Button Classic - Classic Theme */
 /* Original orange/green Digg style (~2008) */
 
-/* Post container - add left padding for vote buttons */
-section[data-ggid] {
+/* Post container - add left padding for vote buttons (list view only, not cards) */
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) {
   position: relative !important;
   padding-left: 70px !important;
 }
 
-/* Vote button container - position on left */
-section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+/* Don't apply classic repositioning inside grid/card layouts */
+[style*="display: grid"] section[data-ggid],
+[style*="display:grid"] section[data-ggid],
+[class*="grid"] section[data-ggid] {
+  padding-left: 0 !important;
+}
+
+/* Vote button container - position on left (list view only) */
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] {
   position: absolute !important;
   left: 0 !important;
   top: 24px !important;
@@ -24,6 +31,19 @@ section[data-ggid] div[role="group"][aria-label="Vote on post"] {
   min-width: 60px !important;
   overflow: hidden !important;
   z-index: 10 !important;
+}
+
+/* Card view - keep buttons inline, just style them */
+[style*="display: grid"] section[data-ggid] div[role="group"][aria-label="Vote on post"],
+[style*="display:grid"] section[data-ggid] div[role="group"][aria-label="Vote on post"],
+[class*="grid"] section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+  position: relative !important;
+  flex-direction: row !important;
+  width: auto !important;
+  min-width: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Vote count display */
@@ -42,8 +62,8 @@ div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
   text-shadow: 0 1px 0 rgba(255,255,255,0.9) !important;
 }
 
-/* Hide original SVG icons */
-section[data-ggid] div[role="group"][aria-label="Vote on post"] button svg {
+/* Hide original SVG icons (list view only) */
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] button svg {
   display: none !important;
 }
 
@@ -80,7 +100,8 @@ button[aria-label="Digg this post"]::before {
 }
 
 /* Digg button - digged state (green) */
-button[aria-label="Remove digg"] {
+button[aria-label="Remove digg"],
+button[aria-label="Digg this post"][aria-pressed="true"] {
   position: relative !important;
   background: linear-gradient(180deg, #7dce7d 0%, #5cb85c 30%, #4cae4c 70%, #3d9140 100%) !important;
   border: none !important;
@@ -94,15 +115,18 @@ button[aria-label="Remove digg"] {
   order: 2 !important;
 }
 
-button[aria-label="Remove digg"]:hover {
+button[aria-label="Remove digg"]:hover,
+button[aria-label="Digg this post"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #8dd88d 0%, #6cc76c 30%, #5cb85c 70%, #4a9e4a 100%) !important;
 }
 
-button[aria-label="Remove digg"] svg {
+button[aria-label="Remove digg"] svg,
+button[aria-label="Digg this post"][aria-pressed="true"] svg {
   display: none !important;
 }
 
-button[aria-label="Remove digg"]::before {
+button[aria-label="Remove digg"]::before,
+button[aria-label="Digg this post"][aria-pressed="true"]::before {
   content: 'dugg';
   white-space: nowrap;
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
@@ -151,7 +175,8 @@ button[aria-label="Bury"]::before {
 }
 
 /* Bury button - buried state (red) */
-button[aria-label="Remove bury"] {
+button[aria-label="Remove bury"],
+button[aria-label="Bury"][aria-pressed="true"] {
   position: relative !important;
   background: linear-gradient(180deg, #e57373 0%, #d32f2f 30%, #c62828 70%, #b71c1c 100%) !important;
   border: none !important;
@@ -165,15 +190,18 @@ button[aria-label="Remove bury"] {
   margin-top: 4px !important;
 }
 
-button[aria-label="Remove bury"]:hover {
+button[aria-label="Remove bury"]:hover,
+button[aria-label="Bury"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #ef9a9a 0%, #e57373 30%, #d32f2f 70%, #c62828 100%) !important;
 }
 
-button[aria-label="Remove bury"] svg {
+button[aria-label="Remove bury"] svg,
+button[aria-label="Bury"][aria-pressed="true"] svg {
   display: none !important;
 }
 
-button[aria-label="Remove bury"]::before {
+button[aria-label="Remove bury"]::before,
+button[aria-label="Bury"][aria-pressed="true"]::before {
   content: 'buried';
   white-space: nowrap;
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
@@ -268,12 +296,14 @@ button[aria-label="Remove comment digg"]::before {
 }
 
 /* Dark mode dugg button */
-.dbc-dark button[aria-label="Remove digg"] {
+.dbc-dark button[aria-label="Remove digg"],
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"] {
   background: linear-gradient(180deg, #4a9a4a 0%, #3d8b3d 30%, #2e7d2e 70%, #1f6f1f 100%) !important;
   border-top-color: #5cb85c !important;
 }
 
-.dbc-dark button[aria-label="Remove digg"]:hover {
+.dbc-dark button[aria-label="Remove digg"]:hover,
+.dbc-dark button[aria-label="Digg this post"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #5cb85c 0%, #4a9a4a 30%, #3d8b3d 70%, #2e7d2e 100%) !important;
 }
 
@@ -287,11 +317,13 @@ button[aria-label="Remove comment digg"]::before {
 }
 
 /* Dark mode buried button */
-.dbc-dark button[aria-label="Remove bury"] {
+.dbc-dark button[aria-label="Remove bury"],
+.dbc-dark button[aria-label="Bury"][aria-pressed="true"] {
   background: linear-gradient(180deg, #c62828 0%, #b71c1c 30%, #a31515 70%, #8f0f0f 100%) !important;
 }
 
-.dbc-dark button[aria-label="Remove bury"]:hover {
+.dbc-dark button[aria-label="Remove bury"]:hover,
+.dbc-dark button[aria-label="Bury"][aria-pressed="true"]:hover {
   background: linear-gradient(180deg, #d32f2f 0%, #c62828 30%, #b71c1c 70%, #a31515 100%) !important;
 }
 

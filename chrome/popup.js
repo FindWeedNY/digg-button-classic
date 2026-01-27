@@ -277,8 +277,8 @@ async function init() {
   // Initialize color picker
   colorPicker.init();
 
-  // Load saved theme, custom palette, and dark mode
-  const result = await chrome.storage.local.get(['theme', 'customPalette', 'darkMode']);
+  // Load saved theme, custom palette, dark mode, and collapse setting
+  const result = await chrome.storage.local.get(['theme', 'customPalette', 'darkMode', 'collapseComments']);
   let theme = result.theme || DEFAULT_THEME;
   const customPalette = result.customPalette || DEFAULT_PALETTE;
   globalDarkMode = result.darkMode || false;
@@ -293,6 +293,9 @@ async function init() {
   selectTheme(theme);
   loadCustomPalette(customPalette);
   updateDarkModeToggle();
+
+  // Set collapse comments checkbox state
+  document.getElementById('collapseComments').checked = result.collapseComments || false;
 
   // Check if on Digg
   checkDiggStatus();
@@ -309,6 +312,13 @@ async function init() {
         : colorItem.querySelector('.hex-input:not([placeholder])');
       colorPicker.open(swatch, hexInput);
     });
+  });
+
+  // Setup collapse comments toggle
+  document.getElementById('collapseComments').addEventListener('change', async (e) => {
+    const collapseComments = e.target.checked;
+    await chrome.storage.local.set({ collapseComments });
+    notifyCollapseChange(collapseComments);
   });
 
   // Setup dark mode toggle
@@ -692,6 +702,18 @@ async function notifyContentScript(theme, customPalette, darkMode) {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     if (tabs[0]?.url?.includes('digg.com')) {
       await chrome.tabs.sendMessage(tabs[0].id, { type: 'themeChanged', theme, customPalette, darkMode });
+    }
+  } catch (e) {
+    // Content script might not be loaded
+    console.log('Could not notify content script:', e);
+  }
+}
+
+async function notifyCollapseChange(collapseComments) {
+  try {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tabs[0]?.url?.includes('digg.com')) {
+      await chrome.tabs.sendMessage(tabs[0].id, { type: 'collapseChanged', collapseComments });
     }
   } catch (e) {
     // Content script might not be loaded

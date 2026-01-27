@@ -7,10 +7,12 @@ const DEFAULT_THEME = 'classic';
 let currentTheme = null;
 let currentCustomPalette = null;
 let currentDarkMode = null;
+let collapseCommentsEnabled = false;
+let commentObserver = null;
 
 async function init() {
-  // Load saved theme, custom palette, and dark mode
-  const result = await chrome.storage.local.get(['theme', 'customPalette', 'darkMode']);
+  // Load saved theme, custom palette, dark mode, and collapse setting
+  const result = await chrome.storage.local.get(['theme', 'customPalette', 'darkMode', 'collapseComments']);
   let theme = result.theme || DEFAULT_THEME;
 
   // Migrate removed themes to classic
@@ -22,10 +24,29 @@ async function init() {
   // Apply theme
   applyTheme(theme, result.customPalette, result.darkMode || false);
 
+  // Apply collapse setting
+  collapseCommentsEnabled = result.collapseComments || false;
+  if (collapseCommentsEnabled) {
+    collapseAllComments();
+    setupCommentCollapseObserver();
+  }
+
   // Listen for theme changes from popup
   chrome.runtime.onMessage.addListener((message) => {
     if (message.type === 'themeChanged') {
       applyTheme(message.theme, message.customPalette, message.darkMode);
+    } else if (message.type === 'collapseChanged') {
+      collapseCommentsEnabled = message.collapseComments;
+      if (collapseCommentsEnabled) {
+        collapseAllComments();
+        setupCommentCollapseObserver();
+      } else {
+        expandAllComments();
+        if (commentObserver) {
+          commentObserver.disconnect();
+          commentObserver = null;
+        }
+      }
     }
   });
 
@@ -64,6 +85,9 @@ async function applyTheme(theme, customPalette, darkMode = false) {
     existingDarkStyle.remove();
   }
 
+  // Clear any inline styles from vote elements for clean theme switching
+  clearVoteElementStyles();
+
   // Remove existing theme class
   document.body.classList.forEach((cls) => {
     if (cls.startsWith('dbc-theme-') || cls === 'dbc-dark') {
@@ -97,6 +121,8 @@ async function applyTheme(theme, customPalette, darkMode = false) {
       console.error(`[Digg Button Classic] Failed to load theme: ${theme}`, e);
       return;
     }
+    // Reset custom palette state so switching back triggers a fresh apply
+    currentCustomPalette = null;
   }
 
   const styleEl = document.createElement('style');
@@ -115,6 +141,36 @@ async function applyTheme(theme, customPalette, darkMode = false) {
   currentTheme = theme;
   currentDarkMode = darkMode;
   console.log(`[Digg Button Classic] Applied theme: ${theme}${darkMode ? ' (dark)' : ''}`);
+}
+
+// Clear inline styles from vote elements for clean theme switching
+function clearVoteElementStyles() {
+  const selectors = [
+    'button[aria-label="Digg this post"]',
+    'button[aria-label="Remove digg"]',
+    'button[aria-label="Bury"]',
+    'button[aria-label="Remove bury"]',
+    'button[aria-label="Digg this comment"]',
+    'button[aria-label="Remove comment digg"]',
+    'button[aria-label="Digg this post"] svg',
+    'button[aria-label="Remove digg"] svg',
+    'button[aria-label="Bury"] svg',
+    'button[aria-label="Remove bury"] svg',
+    'button[aria-label="Digg this comment"] svg',
+    'button[aria-label="Remove comment digg"] svg',
+  ];
+
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el) => {
+      el.removeAttribute('style');
+      // Also clear path styles inside SVGs
+      if (el.tagName === 'svg' || el.tagName === 'SVG') {
+        el.querySelectorAll('path').forEach((path) => {
+          path.removeAttribute('style');
+        });
+      }
+    });
+  });
 }
 
 // Generate dark mode overlay CSS for built-in themes
@@ -305,13 +361,20 @@ function generateCustomCSS(paletteStr) {
   // Classic layout CSS
   const classicLayout = hasClassic
     ? `
-/* Classic Digg Layout - Repositioned to left */
-section[data-ggid] {
+/* Classic Digg Layout - Repositioned to left (list view only, not cards) */
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) {
   position: relative !important;
   padding-left: 70px !important;
 }
 
-section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+/* Don't apply classic repositioning inside grid/card layouts */
+[style*="display: grid"] section[data-ggid],
+[style*="display:grid"] section[data-ggid],
+[class*="grid"] section[data-ggid] {
+  padding-left: 0 !important;
+}
+
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] {
   position: absolute !important;
   left: 0 !important;
   top: 24px !important;
@@ -329,7 +392,20 @@ section[data-ggid] div[role="group"][aria-label="Vote on post"] {
   z-index: 10 !important;
 }
 
-div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
+/* Card view - keep buttons inline, just style them */
+[style*="display: grid"] section[data-ggid] div[role="group"][aria-label="Vote on post"],
+[style*="display:grid"] section[data-ggid] div[role="group"][aria-label="Vote on post"],
+[class*="grid"] section[data-ggid] div[role="group"][aria-label="Vote on post"] {
+  position: relative !important;
+  flex-direction: row !important;
+  width: auto !important;
+  min-width: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
   display: block !important;
   background: ${countBg} !important;
   color: ${countColor} !important;
@@ -342,13 +418,13 @@ div[role="group"][aria-label="Vote on post"] > span[aria-label$="diggs"] {
   order: 1 !important;
 }
 
-section[data-ggid] div[role="group"][aria-label="Vote on post"] button {
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] button {
   border-radius: 0 !important;
   margin: 0 !important;
   width: 100% !important;
 }
 
-section[data-ggid] div[role="group"][aria-label="Vote on post"] button svg {
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] button svg {
   display: none !important;
 }
 
@@ -402,9 +478,62 @@ button[aria-label="Remove bury"]::before {
   // Chevron style CSS
   const chevronStyle = hasChevron ? generateChevronCSS(upvote, downvote, neutral, hasGlow) : '';
 
+  // Reset CSS to clear leftover styles from built-in themes (minimal reset)
+  const resetCSS = `
+/* Reset - Clear ::before text labels from classic/cyberpunk themes */
+${
+  !hasClassic && !hasChevron
+    ? `
+button[aria-label="Digg this post"]::before,
+button[aria-label="Remove digg"]::before,
+button[aria-label="Bury"]::before,
+button[aria-label="Remove bury"]::before,
+button[aria-label="Digg this comment"]::before,
+button[aria-label="Remove comment digg"]::before {
+  content: none !important;
+}
+`
+    : ''
+}
+
+${
+  !hasClassic
+    ? `
+/* Reset container positioning when not in classic layout */
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) {
+  padding-left: 0 !important;
+}
+section[data-ggid]:not([style*="grid"]):not([class*="card"]) div[role="group"][aria-label="Vote on post"] {
+  position: relative !important;
+  flex-direction: row !important;
+  width: auto !important;
+  min-width: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+`
+    : ''
+}
+
+${
+  !hasChevron
+    ? `
+/* Show SVGs when not in chevron mode */
+div[role="group"][aria-label="Vote on post"] button svg,
+button[aria-label="Digg this comment"] svg,
+button[aria-label="Remove comment digg"] svg {
+  display: inline-block !important;
+}
+`
+    : ''
+}
+`;
+
   return `
 /* Digg Button Classic - Custom Theme */
 /* Palette: ${paletteStr} */
+${resetCSS}
 ${classicLayout}
 ${chevronStyle}
 
@@ -563,6 +692,135 @@ button[aria-label="Remove comment digg"]:hover {
   border-radius: 4px !important;
 }
 `;
+}
+
+// Comment collapse functionality
+function collapseAllComments() {
+  // Find all comment sections and collapse them
+  // Digg uses various selectors for comments - try common patterns
+  const commentSelectors = [
+    '[data-testid="comment"]',
+    '[class*="comment"]',
+    'article[class*="Comment"]',
+    '[role="article"][class*="comment"]',
+  ];
+
+  for (const selector of commentSelectors) {
+    const comments = document.querySelectorAll(selector);
+    if (comments.length > 0) {
+      comments.forEach((comment) => {
+        // Don't collapse if already collapsed
+        if (!comment.classList.contains('dbc-collapsed')) {
+          comment.classList.add('dbc-collapsed');
+        }
+      });
+      break; // Found comments, stop trying other selectors
+    }
+  }
+
+  // Add CSS for collapsed state if not already added
+  if (!document.getElementById('dbc-collapse-style')) {
+    const style = document.createElement('style');
+    style.id = 'dbc-collapse-style';
+    style.textContent = `
+      .dbc-collapsed {
+        max-height: 40px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        cursor: pointer !important;
+        opacity: 0.7 !important;
+        transition: max-height 0.2s ease, opacity 0.2s ease !important;
+      }
+      .dbc-collapsed::after {
+        content: '▼ Click to expand';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, var(--dbc-collapse-bg, #1a1a1a) 60%);
+        padding: 20px 12px 8px;
+        font-size: 11px;
+        color: #888;
+        text-align: center;
+      }
+      .dbc-dark .dbc-collapsed::after {
+        --dbc-collapse-bg: #1a1a1a;
+      }
+      .dbc-collapsed:hover {
+        opacity: 1 !important;
+      }
+      .dbc-collapsed:hover::after {
+        color: #ff6f00;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Add click handlers to expand
+  document.querySelectorAll('.dbc-collapsed').forEach((comment) => {
+    if (!comment.dataset.dbcClickHandler) {
+      comment.dataset.dbcClickHandler = 'true';
+      comment.addEventListener('click', function (e) {
+        // Don't expand if clicking on interactive elements
+        if (e.target.closest('button, a, input, textarea')) return;
+        this.classList.remove('dbc-collapsed');
+      });
+    }
+  });
+}
+
+function expandAllComments() {
+  document.querySelectorAll('.dbc-collapsed').forEach((comment) => {
+    comment.classList.remove('dbc-collapsed');
+  });
+}
+
+function setupCommentCollapseObserver() {
+  if (commentObserver) {
+    commentObserver.disconnect();
+  }
+
+  commentObserver = new MutationObserver((mutations) => {
+    if (!collapseCommentsEnabled) return;
+
+    let needsCollapse = false;
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            // Check if the added node is a comment or contains comments
+            if (
+              node.matches &&
+              (node.matches('[data-testid="comment"]') ||
+                node.matches('[class*="comment"]') ||
+                node.matches('article[class*="Comment"]'))
+            ) {
+              needsCollapse = true;
+              break;
+            }
+            if (node.querySelector && node.querySelector('[data-testid="comment"], [class*="comment"]')) {
+              needsCollapse = true;
+              break;
+            }
+          }
+        }
+      }
+      if (needsCollapse) break;
+    }
+
+    if (needsCollapse) {
+      // Debounce to avoid excessive calls
+      clearTimeout(commentObserver._debounceTimer);
+      commentObserver._debounceTimer = setTimeout(() => {
+        collapseAllComments();
+      }, 100);
+    }
+  });
+
+  commentObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 }
 
 // Initialize
