@@ -1,5 +1,7 @@
 # Digg Button Classic
 
+⚠️ digg.com shut down, this is now archived.
+
 remember when digg had those orange vote buttons? yeah, I missed them too.
 
 this extension brings back the classic digg button style to the new digg.com. because the current buttons are boring and we deserve better.
